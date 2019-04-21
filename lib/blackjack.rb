@@ -76,7 +76,6 @@ def runner
     display_card_total(final_cards)
     return final_cards
   end
-  if final_cards > 21
     end_game
   end
 end
