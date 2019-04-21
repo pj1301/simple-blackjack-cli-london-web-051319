@@ -14,7 +14,7 @@ def deal_card
 def display_card_total(card_total)
   # code #display_card_total here
   puts "Your cards add up to #{card_total}"
-  return card_total
+  # return card_total
 end
 
 def prompt_user
@@ -41,8 +41,7 @@ end
 
 def initial_round
 # code #initial_round here
-  sum = deal_card + deal_card # this will call the prior function
-#  binding.pry used PRY to try to work out an initial error
+  sum = deal_card + deal_card # this will call the prior defined function twice adding them together
   display_card_total(sum)
   return sum
 end
@@ -50,19 +49,19 @@ end
 def hit?(value)
   # code hit? here
  prompt_user
- get_user_input
-  while get_user_input == "h"
-    deal_card
-    display_card_total(value)
-  
-  end
- display_card_total(value)
+ input = get_user_input # this returns the function and executes it and sets it equal to a variable
+ if input == "h" # so we know that if we have hit we need to deal a card
+   value += deal_card # and we know that the new value the player has is equal to the previous value plus the new card value which is outputted by deal_card
+ elsif input == "s"
+   value # if we get stick, we don't add cards and the value remains the same
+ # until input == "s"
+ #   deal_card
+ end
 end
 
-
-def invalid_command
-  # code invalid_command here
-end
+# def invalid_command
+#   # code invalid_command here
+# end
 
 #####################################################
 # get every test to pass before coding runner below #
@@ -70,4 +69,14 @@ end
 
 def runner
   # code runner here
+  welcome
+  cards = initial_round
+  until cards > 21
+    final_cards = hit?(cards)
+    display_card_total(final_cards)
+    return final_cards
+  end
+  if final_cards > 21
+    end_game
+  end
 end
